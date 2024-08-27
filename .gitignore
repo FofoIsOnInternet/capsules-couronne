@@ -1,3 +1,7 @@
+./images/capsules/*
+./images/drapeaux/*
+./images/fabriquants/*
+desktop.ini
 # JPEG
 *.jpg
 *.jpeg

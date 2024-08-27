@@ -1,0 +1,108 @@
+/* first row of random crown caps*/
+main > div:first-child{
+    margin : 25px 0 40px 0;
+}
+
+/* puts the paragraphs and the stats side by side*/
+main > div:nth-child(2){
+    display: flex;
+    width:100%;
+    justify-content: space-around;
+
+}
+
+/* éloigne les liens de navigation et le message d'acceuil*/
+main > div:nth-child(2) > div:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60%;
+}
+
+/* Message d'acceuil*/
+main > div:nth-child(2) > div:first-child > div:first-child > p{
+    margin-bottom: 40px;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+/* Navigation */
+main > div:nth-child(2) > div:first-child > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+main > div:nth-child(2) > div:first-child > div:nth-child(2) > div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Navigation links */
+main > div:nth-child(2) > div:first-child > div:nth-child(2) a{
+    color:black;
+    font-size: 17px;
+    text-decoration: none;
+    font-weight: bold;
+}
+main > div:nth-child(2) > div:first-child > div:nth-child(2) a:hover{
+    text-decoration: underline;
+}
+main > div:nth-child(2) > div:first-child > div:nth-child(2) a::after{
+    background-image:url("./../images/icones/fleche.png");
+    background-size: 20px 20px;
+    content: " ";
+    display: inline-block;
+    width:20px;
+    height: 20px;
+    position:relative; 
+    left:-3px;
+    top:5px;
+    transition: left 0.2s ease;
+}
+main > div:nth-child(2) > div:first-child > div:nth-child(2) a:hover::after{
+    left:5px;
+}
+main > div:nth-child(2) > div:first-child > div:nth-child(2) a:focus{
+    color:brown;
+}
+
+/* the bubbles on the right side*/
+main > div:nth-child(2) > div:nth-child(2) > div{
+    display: flex;
+    flex-direction: column;
+    border: rgb(184, 184, 184) 2px solid;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: rgb(241, 241, 241);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+main > div:nth-child(2) > div:nth-child(2) > div table img{
+    width: 16px;
+}
+
+main > div:nth-child(2) > div:nth-child(2) > div h1{
+    align-self: center;
+    font-size: 15px;
+}
+
+/* crown cap image*/
+.crown img{
+    width:130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/* search bar */
+main input#search{
+    display: flex;
+    align-self: center;
+    width:90%;
+    height: 28px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+}

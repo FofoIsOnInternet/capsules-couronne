@@ -1,0 +1,77 @@
+section#info{
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}   
+
+section#countries{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap : 30px
+}
+
+h1 span{
+    font-size: small;
+    padding-left: 3px;
+}
+
+table{
+    width:700px;
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+thead{
+    text-align: left;
+    background-color: rgb(207, 207, 207);
+    border-bottom: 2px solid rgb(104, 104, 104);
+    font-size: 20px;
+    height: 40px;
+    position: sticky;
+    top:0;
+    letter-spacing: 1px;
+}
+
+th,td {
+    border: 1px solid rgb(160 160 160);
+}
+
+tbody > tr{
+    font-size: 17px;
+}
+
+tbody tr > th a{
+    display: flex;
+    align-items: center;
+}
+
+tbody td{
+    text-align: center;
+}
+
+tbody th img{
+    margin: 0 6px 0 4px;
+    width:25px;
+}
+
+
+
+tbody tr[continent="Europe"]{
+    background-color: rgb(213, 255, 212);
+}
+tbody tr[continent="Asie"]{
+    background-color: rgb(240, 215, 250);
+}
+tr[continent="Amérique"]{
+    background-color: rgb(216, 246, 255);
+}
+tbody tr[continent="Afrique"]{
+    background-color: lightgoldenrodyellow;
+}
+tbody tr[continent="Océanie"]{
+    background-color: rgb(255, 211, 218);
+} 

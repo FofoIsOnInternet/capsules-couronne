@@ -1,0 +1,103 @@
+/* ===== Général ===== */
+main > div:nth-child(2){
+    display: flex;
+    width: 100%;
+}
+
+section#main-info{
+    flex-basis: 60%;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+section#images{
+    flex-basis: 40%;
+}
+
+
+/* ===== informations principale (panneau gauche) ===== */
+
+/* labels */
+section#main-info > div:nth-child(2){
+    margin-left: 32px;
+}
+
+img.label{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+span.label:hover::after{
+    content: attr(tooltip);
+    position: absolute;
+
+    display: inline-block;
+    padding: 5px;
+    margin-left: 5px;
+    line-height: 6px;
+    font-size: small;
+    background-color: black;
+    color: white;
+}
+
+/* Pays année*/
+section#main-info > a:first-child{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Liens*/
+section#main-info a{
+    color: black;
+    text-decoration: none;
+}
+/* Tableau */
+
+/*indetation*/
+section#main-info > table{
+    margin: 8px 0 0 15px;
+    border-spacing: 0 20px;
+}
+section#main-info > table th{
+    text-align: start;
+}
+
+img.fs{
+    width:45px;
+}
+
+/* ===== IMAGES ===== */
+
+section#images{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+img.cap{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+img.primary-cap{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+/* ===== COMMENTAIRE ===== */
+section#secondary-info{
+    width: 100%;
+    margin-left: 40px;
+    display: flex;
+    align-items: start;
+}
+section#secondary-info > div:first-child > span:first-child{
+    font-weight: bold;
+    line-height: 35px;
+}

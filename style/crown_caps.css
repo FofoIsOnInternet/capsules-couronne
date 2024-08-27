@@ -1,0 +1,73 @@
+section#country{
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}   
+#country img{
+    width: 32px;
+    height: 32px;
+    margin-right: 3px;
+}
+#country a > img{
+    width: 8px;
+    height: 8px;
+    vertical-align: middle;
+    padding-left: 8px;
+    position: relative;
+}
+#country a:hover::after{
+    content: "fermer";
+    flex: none;
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    margin-left: 5px;
+    line-height: 6px;
+    font-size: small;
+    background-color: black;
+    color: white;
+}
+
+#country span{
+    font-size: small;
+    padding-left: 3px;
+}
+
+#crown-caps{
+    max-width: 800px;
+}
+
+#crown-caps > div:first-child{
+    display: flex;
+    justify-content: end;
+    margin-right: 60px;
+}
+#crown-caps > div:nth-child(2){
+    display: flex;
+    width: 100%;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.crown img{
+    width:130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/* search bar */
+main > input#search{
+    display: flex;
+    width:500px;
+    height: 28px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+}

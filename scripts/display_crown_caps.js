@@ -77,10 +77,10 @@ window.addEventListener('load',()=>{
     let search = getParam("search");
     // Si on est sur la page de recherche
     if(search != null){
-        let searchBar = document.querySelector("main > input#search");
+        let searchBar = document.querySelector("main input#search");
         searchBar.addEventListener('keydown',(event)=>{
             if(event.key === 'Enter'){
-                location.replace("./crown_caps.php?search=" + searchBar.value)
+                window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
             }
         });
     }

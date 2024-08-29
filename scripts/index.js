@@ -1,7 +1,7 @@
-// Barre de recherche 
+// Barre de recherche de <header>
 const searchBar = document.getElementById("search");
 searchBar.addEventListener('keydown',(event)=>{
     if(event.key === 'Enter'){
-        location.replace("./crown_caps.php?search=" + searchBar.value)
+        window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
     }
 })

@@ -6,12 +6,14 @@
     $page_css = "countries.css";
     include "includes/debut-page.php";
 
+    // Check if on duplicates page
     function isDuplicates(){
         return isset($_GET["doublon"]) && $_GET["doublon"] == 1;
     }
 ?>
 
 <main>
+    <!-- Title and country count -->
     <section id="info">
         <h1>
         <?php
@@ -20,10 +22,33 @@
         ?>
         </h1>
     </section>
-    <section id="continents">
-        
+    <!-- Change country order and continent selection -->
+    <section id="options">
+        <h2>Options</h2>
+        <div>
+            <div>
+                <label for="order">Ordre: </label>
+                <select id="order">
+                    <option>Capsules</option>
+                    <option>Alphabétique</option>
+                </select>
+            </div>
+            <div>
+                <label for="continent">Continent: </label>
+                <select id="continent">
+                    <option>Tous</option>
+                    <option>Afrique</option>
+                    <option>Amérique</option>
+                    <option>Asie</option>
+                    <option>Europe</option>
+                    <option>Océanie</option>
+                </select>
+            </div>
+        </div>
     </section>
+    <!-- List of countries -->
     <section id="countries">
+        <h2>Liste des pays</h2>
         <table>
            <thead>
                 <tr>

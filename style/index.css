@@ -46,7 +46,7 @@ header{
     }
 }
 header + div{
-    min-height: 58px;
+    min-height: 50px;
     width:100%;
     max-width: 1200px;
 }

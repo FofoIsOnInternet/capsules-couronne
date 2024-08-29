@@ -50,7 +50,9 @@
     <?php
         // Grande barre de recherche
         if(isResearch()){
+            echo "<div class='searchBar'>";
             echo '<input id="search" placeholder="Rechercher une capsule (texte, mots clé)" name="query" value="'. $_GET["search"] .'">';
+            echo '<button type="button"><img src="./images/icones/search.png" alt="search button icon"></button></div>';
         }
     ?>
     <section id="country">

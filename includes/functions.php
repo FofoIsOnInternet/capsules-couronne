@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Turn an image into its functioning url.
+ * @param mixed $img_name
+ * @param mixed $table_origine
+ * @return string
+ */
 function to_valid_img_url($img_name,$table_origine){
     // Récupère les chemins d'accès aux répertoires d'images
     $json_string = file_get_contents("scripts/repertoires-images.json");
@@ -8,6 +14,11 @@ function to_valid_img_url($img_name,$table_origine){
     return $temp;
 }
 
+/**
+ * Indicates the total amount of caps in the data base.
+ * @param mixed $pdo
+ * @return int
+ */
 function total_crown_caps($pdo){
     $requete = "SELECT COUNT(*) AS 'TOTAL' FROM capsule;";
     $reponse = $pdo -> prepare($requete);
@@ -16,6 +27,11 @@ function total_crown_caps($pdo){
     return intval($result[0]["TOTAL"]);
 }
 
+/**
+ * Indicates the total amount of duplicates cap in the data base.
+ * @param mixed $pdo
+ * @return int
+ */
 function total_duplicates($pdo){
     $requete = "
         SELECT COUNT(*) AS 'TOTAL' 
@@ -28,6 +44,53 @@ function total_duplicates($pdo){
     return intval($result[0]["TOTAL"]);
 }
 
+/**
+ * Indicates the total amount of caps in the data base for the given continent.
+ * @param mixed $pdo
+ * @param mixed $continent
+ * @return int
+ */
+function total_crown_caps_continent($pdo,$continent){
+    $requete = "
+        SELECT COUNT(codeCapsule) AS 'TOTAL'
+        FROM Capsule
+        JOIN Pays ON capsule.codePays = Pays.codePays
+        JOIN continent ON Pays.codeContinent = Continent.codeContinent
+        WHERE continent.nomContinentFR = '" . $continent . "'
+    ";
+    $reponse = $pdo -> prepare($requete);
+    $reponse -> execute();
+    $result = $reponse -> fetchAll();
+    return intval($result[0]["TOTAL"]);
+}
+
+/**
+ * Indicates the total amount of duplicates cap in the data base for the given continent.
+ * @param mixed $pdo
+ * @param mixed $continent
+ * @return int
+ */
+function total_duplicates_continent($pdo,$continent){
+    $requete = "
+        SELECT COUNT(codeCapsule) AS 'TOTAL'
+        FROM Capsule
+        JOIN Pays ON capsule.codePays = Pays.codePays
+        JOIN continent ON Pays.codeContinent = Continent.codeContinent
+        JOIN labelliser ON labelliser.codeCapsule = capsule.codeCapsule
+        WHERE  codeEtiquette= (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon') AND continent.nomContinentFR =  '" . $continent . "';
+    ";
+    $reponse = $pdo -> prepare($requete);
+    $reponse -> execute();
+    $result = $reponse -> fetchAll();
+    return intval($result[0]["TOTAL"]);
+}
+
+/**
+ * Give all the duplicates cap in the collection with its informations.
+ * @param mixed $pdo
+ * @param mixed $country
+ * @return array
+ */
 function get_duplicates($pdo,$country=""){
     $requete = "SELECT * 
             FROM Capsule 
@@ -49,6 +112,12 @@ function get_duplicates($pdo,$country=""){
     return $capsules;
 }
 
+/**
+ * Give all the crown caps in the collection with its informations.
+ * @param mixed $pdo
+ * @param mixed $country
+ * @return array
+ */
 function get_crown_caps($pdo,$country=""){
     $requete = "SELECT * 
             FROM Capsule 
@@ -69,6 +138,12 @@ function get_crown_caps($pdo,$country=""){
     return $capsules;
 }
 
+/**
+ * Return the code of some random crown caps.
+ * @param mixed $pdo
+ * @param mixed $amount
+ * @return array
+ */
 function get_random_crown_caps($pdo,$amount=5){
     $requete = "
         SELECT codeCapsule 
@@ -81,7 +156,12 @@ function get_random_crown_caps($pdo,$amount=5){
     $capsules = $reponse -> fetchAll();
     return $capsules;
 }
-
+/**
+ * Indicates all the information about a given crown cap.
+ * @param mixed $pdo
+ * @param mixed $codeCapsule
+ * @return array
+ */
 function get_crown_cap_info($pdo,$codeCapsule){
     $requete = "
         SELECT * 
@@ -96,6 +176,12 @@ function get_crown_cap_info($pdo,$codeCapsule){
     return $cap_info[0];
 }
 
+/**
+ * Give all the images related to the given crown cap.
+ * @param mixed $pdo
+ * @param mixed $codeCapsule
+ * @return mixed
+ */
 function get_crown_cap_images($pdo,$codeCapsule){
     $requete = "
         SELECT ImageCapsule, estPrincipal
@@ -109,6 +195,12 @@ function get_crown_cap_images($pdo,$codeCapsule){
     return $images;
 }
 
+/**
+ * Give all the labels related to the given crown cap.
+ * @param mixed $pdo
+ * @param mixed $codeCapsule
+ * @return mixed
+ */
 function get_crown_cap_labels($pdo,$codeCapsule){
     $requete = "
         SELECT *
@@ -122,6 +214,12 @@ function get_crown_cap_labels($pdo,$codeCapsule){
     return $labels;
 }
 
+/**
+ * Indicates informations about the given country.
+ * @param mixed $pdo
+ * @param mixed $iso_alpha2
+ * @return mixed
+ */
 function get_country_info($pdo,$iso_alpha2){
     $country = "'" . $iso_alpha2 . "'";
     $requete = "
@@ -138,24 +236,50 @@ function get_country_info($pdo,$iso_alpha2){
     return $country_info;
 }
 
-function get_countries($pdo,$isDuplicates=false){
+/**
+ * Give the list of countries having at least a crown cap.
+ * @param mixed $pdo
+ * @param mixed $isDuplicates
+ * @param mixed $order
+ * @param mixed $continent
+ * @return mixed
+ */
+function get_countries($pdo,$isDuplicates=false,$order="",$continent=""){
+    // ORDER BY
+    if($order == "Alphabétique"){
+        $orderQuery = "nomPaysFR ASC";
+    }else{
+        $orderQuery = "COUNT(codeCapsule) DESC";
+    }
+
+    $continentQuery = "";
+
+    // POUR LES DOUBLONS
     if($isDuplicates){
+        if(in_array($continent,array("Afrique","Amérique","Asie","Europe","Océanie"))){
+            $continentQuery = "AND nomContinentFR='" . $continent . "'";
+        }
         $requete = "SELECT Pays.codePays,nomPaysFR,isoAlpha2,nomContinentFR, COUNT(capsule.codeCapsule) AS 'nbCapsules'
             FROM Pays
             JOIN Continent ON Pays.codeContinent = Continent.codeContinent
             JOIN Capsule ON Pays.codePays = Capsule.codePays
             JOIN labelliser ON labelliser.codeCapsule = capsule.codeCapsule
-            WHERE codeEtiquette = (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon')
+            WHERE codeEtiquette = (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon') ".$continentQuery."
             GROUP BY Pays.codePays
-            ORDER BY COUNT(codeCapsule) DESC;
+            ORDER BY ".$orderQuery.";
         ";
     }else{
+        if(in_array($continent,array("Afrique","Amérique","Asie","Europe","Océanie"))){
+            $continentQuery = "WHERE nomContinentFR='" . $continent . "'";
+        }
+
         $requete = "SELECT Pays.codePays,nomPaysFR,isoAlpha2,nomContinentFR, COUNT(codeCapsule) AS 'nbCapsules'
             FROM Pays
             JOIN Continent ON Pays.codeContinent = Continent.codeContinent
             JOIN Capsule ON Pays.codePays = Capsule.codePays
+              ".$continentQuery." 
             GROUP BY Pays.codePays
-            ORDER BY COUNT(codeCapsule) DESC;
+            ORDER BY  ".$orderQuery.";
         ";
     }
     $reponse = $pdo -> prepare($requete);
@@ -163,7 +287,11 @@ function get_countries($pdo,$isDuplicates=false){
     $countries = $reponse -> fetchAll();
     return $countries;
 }
-
+/**
+ * Give the list of all trades in the data base.
+ * @param mixed $pdo
+ * @return mixed
+ */
 function get_trades ($pdo){
     $requete = "
         SELECT * 
@@ -177,6 +305,12 @@ function get_trades ($pdo){
     return $countries;
 }
 
+/**
+ * Crown cap search algorithm
+ * @param mixed $pdo
+ * @param mixed $input
+ * @return mixed
+ */
 function search_cap($pdo,$input){
     $debut = "
             SELECT Research.codeCapsule, imageCapsule, MIN(filter)

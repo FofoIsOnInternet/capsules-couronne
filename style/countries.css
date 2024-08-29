@@ -1,3 +1,41 @@
+/* sections h2*/
+section > h2{
+    font-size: 19px;
+    margin: 0;
+}
+
+/* selection order & continent*/
+section#options{
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding-bottom: 20px;
+}
+
+section#options > div{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap:30px;
+    margin-left: 40px;
+
+}
+
+section#options label{
+    font-size: 18px;
+}
+
+section#options select{
+    height: 28px;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 3px 3px 3px 3px;
+}
+
+/* title and country count*/
 section#info{
     max-width: 800px;
     width: 100%;
@@ -7,24 +45,32 @@ section#info{
     justify-content: start;
 }   
 
+/* list of countries */
 section#countries{
     display: flex;
+    max-width: 700px;
+    width: 100%;
     justify-content: center;
     flex-direction: column;
-    gap : 30px
+    gap : 10px
 }
 
+/* country count */
 h1 span{
     font-size: small;
     padding-left: 3px;
 }
 
+/* table style */
 table{
-    width:700px;
+    max-width:700px;
+    width:100%;
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin-left: 40px;
 }
+
 thead{
     text-align: left;
     background-color: rgb(207, 207, 207);
@@ -53,25 +99,26 @@ tbody td{
     text-align: center;
 }
 
+/* country flags */
 tbody th img{
     margin: 0 6px 0 4px;
     width:25px;
 }
 
 
-
-tbody tr[continent="Europe"]{
+/* Continent color code */
+tbody tr[continent="Europe"], option[value="Europe"]{
     background-color: rgb(213, 255, 212);
 }
-tbody tr[continent="Asie"]{
+tbody tr[continent="Asie"], option[value="Asie"]{
     background-color: rgb(240, 215, 250);
 }
-tr[continent="Amérique"]{
+tr[continent="Amérique"], option[value="Amérique"]{
     background-color: rgb(216, 246, 255);
 }
-tbody tr[continent="Afrique"]{
+tbody tr[continent="Afrique"], option[value="Afrique"]{
     background-color: lightgoldenrodyellow;
 }
-tbody tr[continent="Océanie"]{
+tbody tr[continent="Océanie"], option[value="Océanie"]{
     background-color: rgb(255, 211, 218);
 } 

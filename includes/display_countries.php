@@ -11,10 +11,16 @@ function isDuplicates(){
 }
 
 // Récupère la liste des pays et leurs infos
-$countries = get_countries($pdo,isDuplicates());
-
+$countries = get_countries($pdo,isDuplicates(),$_POST["order"],$_POST["continent"]);
+// contenu html
 $content = "";
-$total_caps = (isDuplicates()) ? total_duplicates($pdo) : total_crown_caps($pdo);
+// Total de capsule en fonction de : doublon et continent
+if($_POST["continent"] == "Tous"){
+    $total_caps = (isDuplicates()) ? total_duplicates($pdo) : total_crown_caps($pdo);
+}else{
+    $total_caps = (isDuplicates()) ? total_duplicates_continent($pdo,$_POST["continent"]) : total_crown_caps_continent($pdo,$_POST["continent"]);
+}
+
 for ($i=$_POST["coutrycount"];$i<min($coutry_count,count($countries));$i++) {
     $c = $countries[$i];
     $content .= "<tr continent='" . $c['nomContinentFR'] . "'>";

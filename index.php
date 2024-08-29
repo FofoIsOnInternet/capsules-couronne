@@ -17,13 +17,16 @@
         ?>
     </div>
     <div>
+        <!-- main content -->
         <div>
             <div>
+                <!-- welcome message -->
                 <h1>Bienvenue !</h1>
                 <p>Cette collection compte à ce jour <b><?php echo total_crown_caps($pdo); ?></b> capsules !</p>
                 <p>Merci à toutes les personnes qui ont participé de près ou de loin à cette collection ! :)</p>
             </div>
             <div>
+                <!-- Quick navigation links -->
                 <h1>Naviguer</h1>
                 <div>
                     <a href="./crown_caps.php">Parcourrir la collection</a>
@@ -34,10 +37,15 @@
                     <a href="./crown_caps.php?doublon=1">Consulter mes doublons</a>
                     <a href="./echange.php">Echanger avec moi</a>
                 </div>
-                <input id="search" placeholder="Rechercher une capsule dans la collection (texte, mots clé)" name="query">                
+                <!-- Search bar -->
+                <div>
+                    <input id="search" placeholder="Rechercher une capsule dans la collection (texte, mots clé)" name="query">
+                    <button type="button"><img src="./images/icones/search.png" alt="search button icon"></button>
+                </div>
             </div>
         </div>
         <div>
+            <!-- series of bubbles on the right-->
             <div>
                 <h1>Stats</h1>
                 <table>

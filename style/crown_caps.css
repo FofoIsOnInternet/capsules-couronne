@@ -63,11 +63,39 @@ section#country{
 }
 
 /* search bar */
-main > input#search{
+
+main > div:first-child.searchBar{
     display: flex;
-    width:500px;
+    align-items: center;
+    justify-content: center;
+    width:70%;
+}
+
+main input#search{
+    width: 100%;
     height: 28px;
     font-size: 16px;
     border-radius: 5px;
     margin: 10px;
+}
+
+main input#search + button{
+    height: 30px;
+    width:45px;
+    background-color:#1A66FF ;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+main input#search + button:hover{
+    background-color: #1866e3;
+}
+main input#search + button:active{
+    background-color: #2872e9;
+}
+
+main input#search + button img{
+    object-fit: cover;
+    height: 18px;
+    width: 18px;
 }

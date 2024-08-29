@@ -1,7 +1,16 @@
-// Barre de recherche 
-const searchBar = document.querySelector("main input#search");
-searchBar.addEventListener('keydown',(event)=>{
+// Barre de recherche de <header>
+const mainSearchBar = document.querySelector("main input#search");
+
+mainSearchBar.addEventListener('keydown',(event)=>{
     if(event.key === 'Enter'){
-        location.replace("./crown_caps.php?search=" + searchBar.value)
+        window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
     }
-})
+});
+
+
+// Barre de recherche principale
+const searchBarSubmit = document.querySelector("main input#search + button");
+
+searchBarSubmit.addEventListener('click',()=>{
+    window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
+});

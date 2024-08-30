@@ -21,16 +21,17 @@
 <body>
     <header>
         <a href="./index.php"><img src="./images/baner.jpg" alt="banière du site"></a>
+        <img src="./images/icones/menu.png">
         <nav>
             <ul>
                 <li><a href="./index.php">Acceuil</a></li>
-                <li><a href="./crown_caps.php">Parcourrir la collection</a><ul>
+                <li><a>Parcourrir la collection</a><ul>
                     <li><a href="./crown_caps.php">Toutes les capsules</a></li>
                     <li><a href="./countries.php">Par région</a></li>
                     <li><a href="">Par série</a></li>
                     <li><a href="./crown_caps.php?search=">Rechercher</a></li>
                 </ul></li>
-                <li><a href="./crown_caps.php?doublon=1">Doublons</a><ul>
+                <li><a>Doublons</a><ul>
                     <li><a href="./crown_caps.php?doublon=1">Tous les doublons</a></li>
                     <li><a href="./countries.php?doublon=1">Par région</a></li>
                     <li><a href="./echange.php">Echanger</a></li>

@@ -38,11 +38,12 @@ header{
     max-width: 1200px;
     z-index: 10;
     border-radius: 6px 6px 0 0;
-    transition: top ease 0.5s;
+    transition: top ease 0.4s;
 }
 @media screen and (max-width: 1200px) {
     header{
         top:0;
+        border-radius: 0;
     }
 }
 header + div{
@@ -76,7 +77,9 @@ header nav {
     margin-left: 10px;
     width:80%;
 }
-
+header > img:nth-child(2){
+    display: none;
+}
 
 /* navigation links */
 nav a{
@@ -120,12 +123,12 @@ li > ul > li{
 li > ul > li:hover,li > ul > li:hover a{
     background-color:rgb(240, 240, 240) ;
     color:rgb(43, 43, 43);
-    
 }
 
 /* search bar */
 header > input{
     display: flex;
+    justify-self: end;
     width:300px;
     height: 25px;
     border-radius: 5px;
@@ -151,4 +154,90 @@ footer p{
 }
 footer > div > a{
     margin-right: 10px;
+}
+ 
+/* SMALL SCREEN WIDTH */
+
+@media screen and (max-width:800px){
+    /* ==== NAVIGATION ==== */
+
+    /* navigation */
+    header nav{
+        position: absolute;
+        top:50px;
+        width:100%;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden ;
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* 'button' to show and hide nav */
+    header > img:nth-child(2){
+        display: initial;
+        width: 50%;
+        height: 40px;
+        object-fit: contain;
+        margin-left: 10px;
+        filter:invert();
+    }
+
+    /* Show nav */
+    img:active + nav, img:hover + nav, nav:has(li:active), nav:has(li:hover){
+        max-height: 500px;
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* navigation main menu */
+    nav > ul{
+        flex-direction: column;
+        justify-content: end;
+        align-items: start;
+        background-color: rgb(43, 43, 43);
+        padding: 10px 0 10px 20px;
+        gap:0;
+    }
+
+    /* Space between each option in main menu */
+    nav > ul > li{
+        padding-bottom: 30px;
+    }
+    
+    /* drop down menu */
+    li > ul{
+        display: block;
+        position: initial;
+        overflow: hidden;
+        max-height: 0;
+        transition: all 0.4s ease-in-out;
+        padding-left: 20px;
+    }
+    /* Shows drop down menu */
+    li:active > ul,li:hover > ul{
+        position: initial;
+        padding-left: 20px;
+        max-height: 500px;
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* Remove inappropriate wide screen style */
+    li > ul > li:hover,li > ul > li:hover a{
+        background-color: inherit;
+        color: inherit;
+    }
+    li > ul > li{
+        box-shadow: none;
+    }
+
+    /* Vertical white bar on the left of drop down menus */
+    li:active > ul::before, li:hover > ul::before{
+        background-color:rgb(240, 240, 240) ;
+        background-size: 20px 20px;
+        content: " ";
+        display: inline-block;
+        width:5px;
+        height: 40%;
+        position:absolute;
+        left: 33px;
+    }
 }

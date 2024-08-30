@@ -69,6 +69,7 @@ main > div:first-child.searchBar{
     align-items: center;
     justify-content: center;
     width:70%;
+    margin-top: 20px;
 }
 
 main input#search{

@@ -37,11 +37,11 @@
                 <label for="continent">Continent: </label>
                 <select id="continent">
                     <option>Tous</option>
-                    <option>Afrique</option>
-                    <option>Amérique</option>
-                    <option>Asie</option>
-                    <option>Europe</option>
-                    <option>Océanie</option>
+                    <option value="Afrique">Afrique</option>
+                    <option value="Amérique">Amérique</option>
+                    <option value="Asie">Asie</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Océanie">Océanie</option>
                 </select>
             </div>
         </div>

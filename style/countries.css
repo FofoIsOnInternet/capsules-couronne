@@ -107,18 +107,32 @@ tbody th img{
 
 
 /* Continent color code */
-tbody tr[continent="Europe"], option[value="Europe"]{
+tbody tr[continent="Europe"], option[value="Europe"], select:has(> option[value="Europe"]:checked){
     background-color: rgb(213, 255, 212);
 }
-tbody tr[continent="Asie"], option[value="Asie"]{
+tbody tr[continent="Asie"], option[value="Asie"], select:has(> option[value="Asie"]:checked){
     background-color: rgb(240, 215, 250);
 }
-tr[continent="Amérique"], option[value="Amérique"]{
+tr[continent="Amérique"], option[value="Amérique"], select:has(> option[value="Amérique"]:checked){
     background-color: rgb(216, 246, 255);
 }
-tbody tr[continent="Afrique"], option[value="Afrique"]{
+tbody tr[continent="Afrique"], option[value="Afrique"], select:has(> option[value="Afrique"]:checked){
     background-color: lightgoldenrodyellow;
 }
-tbody tr[continent="Océanie"], option[value="Océanie"]{
+tbody tr[continent="Océanie"], option[value="Océanie"], select:has(> option[value="Océanie"]:checked){
     background-color: rgb(255, 211, 218);
-} 
+}
+
+@media screen and (max-width:800px) {
+    main table{
+        margin: 0;
+        width: 90%;
+        align-self: center;
+    }
+}
+@media screen and (max-width:420px) {
+    main table th{
+        font-size: 15px;
+        word-break: break-all;
+    }
+}

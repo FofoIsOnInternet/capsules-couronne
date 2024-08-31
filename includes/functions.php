@@ -301,8 +301,22 @@ function get_trades ($pdo){
     ";
     $reponse = $pdo -> prepare($requete);
     $reponse -> execute();
-    $countries = $reponse -> fetchAll();
-    return $countries;
+    $trades = $reponse -> fetchAll();
+    return $trades;
+}
+
+function get_sets ($pdo){
+    $requete = "
+        SELECT SetCapsule.codeSet, nomSet, descriptionSet, COUNT(codeCapsule) AS 'nbCapsules'
+        FROM SetCapsule
+        LEFT JOIN Capsule ON Capsule.codeSet = SetCapsule.codeSet
+        GROUP BY SetCapsule.codeSet, nomSet, descriptionSet
+        ORDER BY nomSet ASC;
+    ";
+    $reponse = $pdo -> prepare($requete);
+    $reponse -> execute();
+    $sets = $reponse -> fetchAll();
+    return $sets;
 }
 
 /**

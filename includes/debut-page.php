@@ -28,7 +28,7 @@
                 <li><a>Parcourrir la collection</a><ul>
                     <li><a href="./crown_caps.php">Toutes les capsules</a></li>
                     <li><a href="./countries.php">Par région</a></li>
-                    <li><a href="">Par série</a></li>
+                    <li><a href="./sets.php">Par série</a></li>
                     <li><a href="./crown_caps.php?search=">Rechercher</a></li>
                 </ul></li>
                 <li><a>Doublons</a><ul>

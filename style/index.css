@@ -106,10 +106,16 @@ nav li{
 
 /* drop down navigation */
 li > ul{
-    display: none;
+    position: fixed;
+    max-height: 0;
+    transition: max-height 0.2s ease-in-out;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 li:hover > ul{
-    display: block;
+    max-height: 500px;
+    transition: max-height 0.1s ease-in-out;
     position: absolute;
     padding: 0;
     margin: 0;

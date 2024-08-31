@@ -1,0 +1,7 @@
+section#sets > div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 17px;
+    gap:5px;
+}

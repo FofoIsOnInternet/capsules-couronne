@@ -1,11 +1,10 @@
 <?php
 require "connexion_base.php";
 require "functions.php";
-// augmente le nombre de pays affiché
-$sets_count = 0;
+
 $sets = array();
 
-// Récupère la liste des pays et leurs infos
+// Récupère la liste des séries et leurs infos
 $sets = get_sets($pdo,$_POST["input"]);
 // contenu html
 $content = "";
@@ -15,7 +14,7 @@ for ($i=0;$i<count($sets);$i++) {
     $s = $sets[$i];
     if($s["nomSet"][0] != $initial){
         $initial = $s["nomSet"][0];
-        $content .= "<h2 id='title-" . $initial . "'>" . strtoupper($initial) . "</h2>";
+        $content .= "<h2 id='title-" . strtolower($initial) . "'>" . strtoupper($initial) . "</h2>";
     }
     $content .= "<a href='./crown_caps.php?set=" . $s["codeSet"] . "' title='" . $s["descriptionSet"] . "'>";
     $content .= $s["nomSet"];

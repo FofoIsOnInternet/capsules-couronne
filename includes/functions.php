@@ -328,7 +328,7 @@ function get_sets ($pdo,$input=""){
  */
 function search_cap($pdo,$input){
     $debut = "
-            SELECT Research.codeCapsule, imageCapsule, MIN(filter)
+            SELECT Research.codeCapsule, Capsule.*, imageCapsule, MIN(filter)
             FROM (
     ";
 

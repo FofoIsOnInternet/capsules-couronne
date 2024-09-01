@@ -72,12 +72,32 @@ section#sets > div{
     width: 100%;
 }
 
+/* Two sets can be side by side*/
 section#sets a{
     flex-basis: 40%;
 }
+/* A title takes a whole row*/
 section#sets h2{
     flex-basis: 100%;
 }
+/* crown count for each set*/
 section#sets a > span{
     font-size: 14px;
+}
+
+@media screen and (max-width:500px){
+    section#options input{
+        max-width: 80vw;
+    }
+}
+
+@media screen and (max-width:300px){
+    /* A set now takes a whole row*/
+    section#sets a{
+        flex-basis: 80%;
+    }
+    /* space between sets */
+    section#sets > div{
+        gap:12px;
+    }
 }

@@ -31,7 +31,7 @@
                 <div>
                     <a href="./crown_caps.php">Parcourrir la collection</a>
                     <a href="./countries.php">Les régions</a>
-                    <a href="">Les séries</a>
+                    <a href="./sets.php">Les séries</a>
                 </div>
                 <div>
                     <a href="./crown_caps.php?doublon=1">Consulter mes doublons</a>

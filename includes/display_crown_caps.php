@@ -28,7 +28,7 @@ if(isset($_POST["search"])){ // appel à l'algorithme de recherche
 $content = "";
 for ($i=$start;$i<min($end,count($capsules));$i++) { 
     $cap = $capsules[$i];
-    $content .= "<a class='crown' href='./cap.php?id=". $cap["codeCapsule"] ."'>";
+    $content .= "<a class='crown' href='./cap.php?id=". $cap["codeCapsule"] ."' title='" . $cap["texteJupe"] . "'>";
         $content .= "<img class='capsule-normal' src='images/capsules/" . to_valid_img_url($cap['imageCapsule'],"Capsule") . "'>";
         $content .= "<div>";
         $content .= "</div>";

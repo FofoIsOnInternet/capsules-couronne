@@ -90,6 +90,8 @@ nav a{
     white-space:nowrap;
     font-weight: bold;
     letter-spacing: 0.8px;
+    width: 100%;
+    height: 100%;
 }
 /* main navigation */
 nav > ul {
@@ -102,6 +104,7 @@ nav > ul {
 }
 nav li{
     list-style: none;
+    cursor: pointer;
 }
 
 /* drop down navigation */
@@ -186,10 +189,11 @@ footer > div > a{
         object-fit: contain;
         margin-left: 10px;
         filter:invert();
+        cursor: pointer;
     }
 
     /* Show nav */
-    img:active + nav, img:hover + nav, nav:has(li:active), nav:has(li:hover){
+    img:active + nav, img:hover + nav, nav:has(li:active), nav:has(li:hover),nav:has(ul:hover > li){
         max-height: 500px;
         transition: all 0.4s ease-in-out;
     }

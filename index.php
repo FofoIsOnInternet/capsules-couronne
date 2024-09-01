@@ -40,7 +40,7 @@
                 <!-- Search bar -->
                 <div>
                     <input id="search" placeholder="Rechercher une capsule dans la collection (texte, mots clé)" name="query">
-                    <button type="button"><img src="./images/icones/search.png" alt="search button icon"></button>
+                    <button type="button" title="Rechercher"><img src="./images/icones/search.png" alt="search button icon"></button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,83 @@
-section#sets > div{
+
+/* title and sets count */
+section#info{
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+/* display options */
+section#options{
+    max-width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding-bottom: 20px;
+}
+section#options > div{
+    width: 100%;
+}
+
+/* Search bar */
+section#options input{
+    height: 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    max-width: 450px;
+    width:100%;
+}
+
+/* alphabet */
+section#options > div > div{
+    max-width: 210px;
+    width:100%;
+    font-size: 18px;
+    display: flex;
     flex-wrap: wrap;
-    font-size: 17px;
+    gap:6px;
+    padding-top: 15px;
+}
+
+/* Titres de section */
+section > h2{
+    font-size: 19px;
+    margin: 0;
+}
+
+/* indentation du contenu de chaque section */
+section > div{
+    margin-left: 40px;
+}
+
+/* sets count */
+h1 span{
+    font-size: small;
+    padding-left: 3px;
+}
+/* Sets countainer */
+section#sets{
+    max-width: 700px;
+    width: 100%;
+
+}
+section#sets > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 18px;
     gap:5px;
+    width: 100%;
+}
+
+section#sets a{
+    flex-basis: 40%;
+}
+section#sets h2{
+    flex-basis: 100%;
+}
+section#sets a > span{
+    font-size: 14px;
 }

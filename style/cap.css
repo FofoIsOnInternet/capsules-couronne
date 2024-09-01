@@ -26,18 +26,6 @@ img.label{
     height: 20px;
     margin-right: 5px;
 }
-span.label:hover::after{
-    content: attr(tooltip);
-    position: absolute;
-
-    display: inline-block;
-    padding: 5px;
-    margin-left: 5px;
-    line-height: 6px;
-    font-size: small;
-    background-color: black;
-    color: white;
-}
 
 /* Pays année*/
 section#main-info > a:first-child{

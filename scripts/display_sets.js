@@ -1,6 +1,7 @@
 // DOM elements
 const sets = document.querySelector("section#sets > div");
 const setsCountDisplay = document.querySelector("section#info > h1 > span");
+const setsSearchBar = document.querySelector("section#options input#SetSearch");
 
 /**
  * Affiche les pays et gère les fetch des pays.
@@ -12,7 +13,7 @@ display_data = async () =>{
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: ""
+        body: "input=" + setsSearchBar.value
     })
     .then(response =>  response.json())
     .then((response)=>{
@@ -25,20 +26,6 @@ display_data = async () =>{
     });
 }
 
-/**
- * Cherche dans l'url le paramètre demandé et retourne sa valeur ou null
- * @param {string} param  Paramètre cherché
- * @returns string ou null
- */
-function getParam(param){
-    var qs = window.location.search.substring(1).split('&');
-    var qsp;
-    for (p in qs){
-        qsp = qs[p].split('=');
-        if (qsp[0] == param) return qsp[1]; 
-    }
-    return null;
-}
-
 // Après chargement de la page
 window.addEventListener('load',display_data);
+setsSearchBar.addEventListener('keydown',()=>setTimeout(display_data,100));

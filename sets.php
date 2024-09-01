@@ -11,7 +11,22 @@
             <span>(0)</span>
         </h1>
     </section>
+    <section id="options">
+        <h2>Options</h2>
+        <div>
+            <input id="SetSearch" placeholder="Rechercher une série de capsules" name="sets">
+            <div>
+                <?php
+                    foreach(range('a','z') as $letter){
+                        echo "<a href='./sets.php#title-".$letter."' title='aller à la lettre ".$letter."' >".$letter."</a>";
+                    }
+                ?>
+            </div>
+        </div>
+
+    </section>
     <section id="sets">
+        <h2>Liste des séries</h2>
         <div>
 
         </div>

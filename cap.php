@@ -36,7 +36,7 @@
             // étiquettes ici labels
             echo "<div>";
                 foreach($labels as $l){
-                    echo "<span class='label' tooltip='" . $l["libeleEtiquette"] ."'><img class='label' src='images/icones/" . $l["imageEtiquette"] . "' alt='" . $l["libeleEtiquette"] ."'></span>"  ;
+                    echo "<span class='label' title='" . $l["libeleEtiquette"] ."'><img class='label' src='images/icones/" . $l["imageEtiquette"] . "' alt='" . $l["libeleEtiquette"] ."'></span>"  ;
                 }
             echo "</div>";
             ?>

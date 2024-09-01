@@ -52,7 +52,7 @@
         if(isResearch()){
             echo "<div class='searchBar'>";
             echo '<input id="search" placeholder="Rechercher une capsule (texte, mots clé)" name="query" value="'. $_GET["search"] .'">';
-            echo '<button type="button"><img src="./images/icones/search.png" alt="search button icon"></button></div>';
+            echo '<button type="button" title="Rechercher"><img src="./images/icones/search.png" alt="search button icon"></button></div>';
         }
     ?>
     <section id="country">
@@ -73,11 +73,11 @@
             echo "<span>(".$nbCapsules.")</span>"; // caps count for country or research result
             // Back button
             if(isResearch()){ // back to caps of country 
-                echo "<a href='./crown_caps.php?country=" . $_GET["country"] . "'><img src='images/icones/close.png'></a>";
+                echo "<a href='./crown_caps.php?country=" . $_GET["country"] . "' title='fermer'><img src='images/icones/close.png'></a>";
             }elseif(isDuplicates()){
-                echo "<a href='./countries.php?doublon=1'><img src='images/icones/close.png'></a>";
+                echo "<a href='./countries.php?doublon=1' title='fermer'><img src='images/icones/close.png'></a>";
             }else{ // back to country list
-                echo "<a href='./countries.php'><img src='images/icones/close.png'></a>";
+                echo "<a href='./countries.php' title='fermer'><img src='images/icones/close.png'></a>";
             }
             
         }else{ // Sinon affichage classique
@@ -94,7 +94,7 @@
             echo "<span>(".$nbCapsules.")</span>"; // total caps count
             // Back button
             if(isResearch()){ // back to full caps list
-                echo "<a href='./crown_caps.php'><img src='images/icones/close.png'></a>";
+                echo "<a href='./crown_caps.php' title='fermer'><img src='images/icones/close.png'></a>";
             }
         }
     ?>
@@ -102,8 +102,8 @@
     <section id="crown-caps">
         <!-- Navigation de page -->
         <div>
-            <button type="button" onclick="display_data(-1<?php echo $param; ?>)">-</button>
-            <select id="page-count">
+            <button type="button" onclick="display_data(-1<?php echo $param; ?>)" title="Page précédente">-</button>
+            <select id="page-count"  title="Changer de page">
                 <?php
                 echo "<option>1</option>";
                 for($i=25;$i<$nbCapsules;$i+=25){
@@ -111,7 +111,7 @@
                 }
                 ?>
             </select>
-            <button type="button" onclick="display_data(1<?php echo $param; ?>)">+</button>
+            <button type="button" onclick="display_data(1<?php echo $param; ?>)" title="Page suivante">+</button>
             <?php echo "<span> / " . $nbCapsules . "</span>"; ?>
         </div>
         <!-- Conteneur des capsules -->

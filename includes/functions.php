@@ -305,11 +305,12 @@ function get_trades ($pdo){
     return $trades;
 }
 
-function get_sets ($pdo){
+function get_sets ($pdo,$input=""){
     $requete = "
         SELECT SetCapsule.codeSet, nomSet, descriptionSet, COUNT(codeCapsule) AS 'nbCapsules'
         FROM SetCapsule
         LEFT JOIN Capsule ON Capsule.codeSet = SetCapsule.codeSet
+        WHERE nomSet LIKE '%" . $input . "%'
         GROUP BY SetCapsule.codeSet, nomSet, descriptionSet
         ORDER BY nomSet ASC;
     ";

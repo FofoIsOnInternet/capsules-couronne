@@ -18,18 +18,6 @@ section#country{
     padding-left: 8px;
     position: relative;
 }
-#country a:hover::after{
-    content: "fermer";
-    flex: none;
-    position: absolute;
-    display: inline-block;
-    padding: 5px;
-    margin-left: 5px;
-    line-height: 6px;
-    font-size: small;
-    background-color: black;
-    color: white;
-}
 
 #country span{
     font-size: small;

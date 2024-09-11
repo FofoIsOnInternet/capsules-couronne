@@ -50,8 +50,14 @@
     <?php
         // Grande barre de recherche
         if(isResearch()){
+            // erase button visibility
+            $visibility = '';
+            if(strlen($_GET["search"]) == 0){
+                $visibility = 'style="visibility:hidden;"';
+            }
             echo "<div class='searchBar'>";
             echo '<input id="search" placeholder="Rechercher une capsule (texte, mots clé)" name="query" value="'. $_GET["search"] .'">';
+            echo "<button type='button' title='Effacer' " . $visibility . " ><img src='images/icones/close.png'></button>";
             echo '<button type="button" title="Rechercher"><img src="./images/icones/search.png" alt="search button icon"></button></div>';
         }
     ?>

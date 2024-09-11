@@ -77,11 +77,30 @@ window.addEventListener('load',()=>{
     let search = getParam("search");
     // Si on est sur la page de recherche
     if(search != null){
+        // Press enter
         let searchBar = document.querySelector("main input#search");
+        let eraseButton = document.querySelector("main input#search + button");
         searchBar.addEventListener('keydown',(event)=>{
             if(event.key === 'Enter'){
-                window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
+                window.location.href = "./crown_caps.php?search=" + searchBar.value;
             }
+            // Check to display erase button
+            if(searchBar.value.length > 0){
+                eraseButton.style.visibility = "initial";
+            }else{
+                eraseButton.style.visibility = "hidden";
+            }
+        });
+        // Click search button
+        let searchButton = document.querySelector("main input#search + button + button");
+        searchButton.addEventListener('click',()=>{
+            window.location.href = "./crown_caps.php?search=" + searchBar.value;
+        });
+        // Erase button
+        eraseButton.addEventListener('click',()=>{
+            searchBar.value = "";
+            searchBar.focus();
+            eraseButton.style.visibility = "hidden";
         });
     }
     // affiche les données

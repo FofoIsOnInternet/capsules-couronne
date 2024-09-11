@@ -68,7 +68,7 @@ main input#search{
     margin: 10px;
 }
 
-main input#search + button{
+main input#search + button + button{
     height: 30px;
     width:45px;
     background-color:#1A66FF ;
@@ -76,15 +76,34 @@ main input#search + button{
     border-radius: 4px;
     cursor: pointer;
 }
-main input#search + button:hover{
+main input#search + button + button:hover{
     background-color: #1866e3;
 }
-main input#search + button:active{
+main input#search + button + button:active{
     background-color: #2872e9;
 }
 
-main input#search + button img{
+main input#search + button + button img{
     object-fit: cover;
     height: 18px;
     width: 18px;
+}
+
+/* erase button */
+main input#search + button img{
+    object-fit: cover;
+    height: 10px;
+    width: 10px;
+}
+main input#search + button{
+    height: 15px;
+    width:15px;
+    background-color:transparent ;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    right:35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

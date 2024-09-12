@@ -14,7 +14,10 @@
     <section id="options">
         <h2>Options</h2>
         <div>
-            <input id="SetSearch" placeholder="Rechercher une série de capsules" name="sets">
+            <div id="search">
+                <input id="SetSearch" placeholder="Rechercher une série de capsules" name="sets">
+                <button type='button' title='Effacer'><img src='images/icones/close.png'></button>
+            </div>
             <div>
                 <?php
                     foreach(range('a','z') as $letter){

@@ -7,14 +7,17 @@ mainSearchBar.addEventListener('keydown',(event)=>{
     if(event.key === 'Enter'){
         window.location.href = "./crown_caps.php?search=" + mainSearchBar.value;
     }
-    // Check to display erase button
-    if(mainSearchBar.value.length > 0){
+});
+// Check search bar emptyness to display erase button
+mainSearchBar.addEventListener('input',(event)=>{
+    if(mainSearchBar.value.trim().length > 0){
         eraseButton.style.visibility = "initial";
     }else{
         eraseButton.style.visibility = "hidden";
     }
 });
 
+// Erase search bar content
 eraseButton.addEventListener('click',()=>{
     mainSearchBar.value = "";
     mainSearchBar.focus();

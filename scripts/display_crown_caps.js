@@ -85,7 +85,15 @@ window.addEventListener('load',()=>{
                 window.location.href = "./crown_caps.php?search=" + searchBar.value;
             }
             // Check to display erase button
-            if(searchBar.value.length > 0){
+            if(searchBar.value.length > 1){
+                eraseButton.style.visibility = "initial";
+            }else{
+                eraseButton.style.visibility = "hidden";
+            }
+        });
+        // Check search bar emptyness to display erase button
+        searchBar.addEventListener('input',(event)=>{
+            if(searchBar.value.trim().length > 0){
                 eraseButton.style.visibility = "initial";
             }else{
                 eraseButton.style.visibility = "hidden";

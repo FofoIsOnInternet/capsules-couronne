@@ -21,6 +21,13 @@ section#options > div{
     width: 100%;
 }
 
+/* search bar container */
+div#search{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
 /* Search bar */
 section#options input{
     height: 25px;
@@ -30,8 +37,28 @@ section#options input{
     width:100%;
 }
 
+/* erase button */
+section#options input + button img{
+    object-fit: cover;
+    height: 10px;
+    width: 10px;
+}
+section#options input + button{
+    height: 15px;
+    width:15px;
+    background-color:transparent ;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    right:25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
 /* alphabet */
-section#options > div > div{
+section#options > div > div:last-child{
     max-width: 210px;
     width:100%;
     font-size: 18px;

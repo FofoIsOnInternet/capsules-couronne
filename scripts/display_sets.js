@@ -2,6 +2,8 @@
 const sets = document.querySelector("section#sets > div");
 const setsCountDisplay = document.querySelector("section#info > h1 > span");
 const setsSearchBar = document.querySelector("section#options input#SetSearch");
+// clear search input
+const eraseButton = document.querySelector("section#options input#SetSearch + button");
 
 /**
  * Affiche les pays et gère les fetch des pays.
@@ -13,7 +15,7 @@ display_data = async () =>{
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: "input=" + setsSearchBar.value
+        body: "input=" + setsSearchBar.value.trim()
     })
     .then(response =>  response.json())
     .then((response)=>{
@@ -28,4 +30,21 @@ display_data = async () =>{
 
 // Après chargement de la page
 window.addEventListener('load',display_data);
-setsSearchBar.addEventListener('keydown',()=>setTimeout(display_data,100));
+setsSearchBar.addEventListener('input',display_data);
+
+// Check search bar emptyness to display erase button
+setsSearchBar.addEventListener('input',(event)=>{
+    if(setsSearchBar.value.trim().length > 0){
+        eraseButton.style.visibility = "initial";
+    }else{
+        eraseButton.style.visibility = "hidden";
+    }
+});
+
+// Erase search bar content
+eraseButton.addEventListener('click',()=>{
+    setsSearchBar.value = "";
+    setsSearchBar.focus();
+    eraseButton.style.visibility = "hidden";
+    display_data();
+});

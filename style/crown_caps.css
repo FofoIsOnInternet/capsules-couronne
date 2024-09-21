@@ -41,13 +41,30 @@ section#country{
     align-items: center;
 }
 
-.crown img{
+/* Crown caps images */
+/* container */
+.crown{
     width:130px;
     height: 130px;
-    object-fit: cover;
     border-radius: 5px;
     margin: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: relative;
+}
+/* general css */
+.crown img{
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+/* other image only apears on hover */
+.crown img.capsule-inside{
+    visibility: hidden;
+}
+.crown:hover img.capsule-inside{
+    visibility: initial;
 }
 
 /* search bar */

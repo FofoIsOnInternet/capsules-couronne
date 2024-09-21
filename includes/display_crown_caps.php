@@ -30,6 +30,10 @@ for ($i=$start;$i<min($end,count($capsules));$i++) {
     $cap = $capsules[$i];
     $content .= "<a class='crown' href='./cap.php?id=". $cap["codeCapsule"] ."' title='" . $cap["texteJupe"] . "'>";
         $content .= "<img class='capsule-normal' src='images/capsules/" . to_valid_img_url($cap['imageCapsule'],"Capsule") . "'>";
+        $images = get_crown_cap_images($pdo, $cap['codeCapsule']);
+        if(sizeof($images) > 1){
+            $content .= "<img class='capsule-inside' src='images/capsules/" . to_valid_img_url($images[1]["ImageCapsule"],"Capsule") . "'>";
+        }
         $content .= "<div>";
         $content .= "</div>";
     $content .= "</a>";

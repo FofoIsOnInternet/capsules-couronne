@@ -11,12 +11,14 @@ section#country{
     height: 32px;
     margin-right: 3px;
 }
+/* back to country list button */
 #country a > img{
     width: 8px;
     height: 8px;
     vertical-align: middle;
     padding-left: 8px;
     position: relative;
+    filter: var(--filter-icons-black);
 }
 
 #country span{
@@ -26,6 +28,7 @@ section#country{
 
 #crown-caps{
     max-width: 800px;
+    width: 100%;
 }
 
 #crown-caps > div:first-child{
@@ -41,6 +44,16 @@ section#country{
     align-items: center;
 }
 
+/* Page navigation buttons */
+section#crown-caps > div:first-child button{
+    background-color: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /* Crown caps images */
 /* container */
 .crown{
@@ -50,14 +63,20 @@ section#country{
     margin: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     position: relative;
+    overflow: hidden;
 }
+
+/* caps with multiple pictures have a corner truncated */
+.crown:has(.capsule-inside){
+    clip-path: polygon(100% 0, 100% 85%, 85% 100%, 0 100%, 0 0);
+}
+
 /* general css */
 .crown img{
     object-fit: cover;
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
 }
 /* other image only apears on hover */
 .crown img.capsule-inside{
@@ -88,16 +107,16 @@ main input#search{
 main input#search + button + button{
     height: 30px;
     width:45px;
-    background-color:#1A66FF ;
+    background-color:var(--color-button-primary) ;
     border: 0;
     border-radius: 4px;
     cursor: pointer;
 }
 main input#search + button + button:hover{
-    background-color: #1866e3;
+    background-color: var(--color-button-hover);
 }
 main input#search + button + button:active{
-    background-color: #2872e9;
+    background-color:  var(--color-button-active);
 }
 
 main input#search + button + button img{
@@ -123,4 +142,5 @@ main input#search + button{
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: var(--filter-icons-black);
 }

@@ -42,6 +42,7 @@ section#options input + button img{
     object-fit: cover;
     height: 10px;
     width: 10px;
+    filter:var(--filter-icons-black);
 }
 section#options input + button{
     height: 15px;

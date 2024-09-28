@@ -1,0 +1,65 @@
+:root, [theme=light]{
+    /* backgrounds */
+    --color-bg-website:rgb(225, 225, 225);
+    --color-bg-maincontent: rgb(255, 255, 255);
+    --color-animation-dropdown:rgb(240, 240, 240);
+    --color-bg-header:rgb(43, 43, 43);
+    --color-bg-bubbles:rgb(241, 241, 241);
+    /* buttons */
+    --color-button-primary:#1A66FF;
+    --color-button-hover:#1866e3;
+    --color-button-active:#2872e9;
+    /* search bars */
+    /* text */
+    --color-text:black;
+    /* tables */
+    --color-bg-table-head:rgb(207, 207, 207);
+    /* countries */
+    --color-coutry-eu:rgb(213, 255, 212);
+    --color-coutry-as:rgb(240, 215, 250);
+    --color-coutry-am:rgb(216, 246, 255);
+    --color-coutry-af:lightgoldenrodyellow;
+    --color-coutry-oc:rgb(255, 211, 218);
+    /* links */
+    --color-link: #0000EE;
+    --color-link-active: #FF0000;
+    --color-link-visited: #551A8B;
+    /* drop downs */
+    --color-bg-dropdown:initial;
+    /* icons & images */
+    --filter-icons-black:none;
+    --invert-icons-black:0;
+}
+
+[theme=dark]{
+    /* backgrounds */
+    --color-bg-website:#121212;
+    --color-bg-maincontent: #282828;
+    --color-animation-dropdown:rgb(240, 240, 240);
+    --color-bg-header:#3f3f3f;
+    --color-bg-bubbles:inherit;
+    /* buttons */
+    --color-button-primary:#BB86FC;
+    --color-button-hover:#9168c2;
+    --color-button-active:#a879e1;
+    /* search bars */
+    /* text */
+    --color-text:white;
+    /* tables */
+    --color-bg-table-head:rgb(69, 69, 69);
+    /* countries */
+    --color-coutry-eu:rgba(118, 249, 116, 0.5);
+    --color-coutry-as:rgba(200, 78, 249, 0.5);
+    --color-coutry-am:rgba(96, 208, 243, 0.5);
+    --color-coutry-af:rgba(193, 193, 9, 0.5);
+    --color-coutry-oc:rgba(255, 153, 170, 0.5);
+    /* links */
+    --color-link: #8282ff;
+    --color-link-active: #e75c5c;
+    --color-link-visited: #b379ea;
+    /* drop downs */
+    --color-bg-dropdown:#3f3f3f;
+    /* icons & images */
+    --filter-icons-black:invert(1);
+    --invert-icons-black:1;
+}

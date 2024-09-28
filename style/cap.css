@@ -38,7 +38,7 @@ section#main-info > a:first-child{
 
 /* Liens*/
 section#main-info a{
-    color: black;
+    color: var(--color-text);
     text-decoration: none;
 }
 /* Tableau */

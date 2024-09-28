@@ -9,5 +9,6 @@
 
 </footer>
 </body>
-<script src="scripts/index.js"></script>
+<script type="module" src="scripts/index.js"></script>
+<script type="module" src="scripts/cookie.js"></script>
 </html>

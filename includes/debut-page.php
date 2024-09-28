@@ -4,13 +4,14 @@
     require("includes/functions.php");
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titre_page;?></title>
     <!-- CSS général  -->
     <link rel="stylesheet" type="text/css" href="style/index.css">
+    <link rel="stylesheet" type="text/css" href="style/color-themes.css">
     <!-- CSS spécifique à la page  -->
     <?php
         if(isset($page_css)){
@@ -39,6 +40,7 @@
             </ul>
         </nav>
         <input id="search" placeholder="Rechercher une capsule" name="query" value="<?php echo $_GET["search"] ?>">
+        <button id="theme-mode"><img src="./images/icones/dark_mode.svg"></button>
     </header>
     <div>&nbsp;</div>
     <div>&nbsp;</div>

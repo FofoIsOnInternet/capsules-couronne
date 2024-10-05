@@ -34,7 +34,7 @@
         $nbCapsules = count(search_cap($pdo,$_GET["search"]));
     }elseif(isCountry()){ // Pays -> nbCapsules du pays
         if(isDuplicates()){
-            $nbCapsules = count(get_duplicates($pdo, "AND isoAlpha2='".$country_info['isoAlpha2'] . "'"));
+            $nbCapsules = count(get_duplicates($pdo, $country_info['isoAlpha2']));
         }else{
             $nbCapsules = $country_info['nbCapsules'];
         }

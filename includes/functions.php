@@ -56,10 +56,10 @@ function total_crown_caps_continent($pdo,$continent){
         FROM Capsule
         JOIN Pays ON capsule.codePays = Pays.codePays
         JOIN continent ON Pays.codeContinent = Continent.codeContinent
-        WHERE continent.nomContinentFR = '" . $continent . "'
+        WHERE continent.nomContinentFR = :continent
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([':continent'=>$continent]);
     $result = $reponse -> fetchAll();
     return intval($result[0]["TOTAL"]);
 }
@@ -77,10 +77,10 @@ function total_duplicates_continent($pdo,$continent){
         JOIN Pays ON capsule.codePays = Pays.codePays
         JOIN continent ON Pays.codeContinent = Continent.codeContinent
         JOIN labelliser ON labelliser.codeCapsule = capsule.codeCapsule
-        WHERE  codeEtiquette= (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon') AND continent.nomContinentFR =  '" . $continent . "';
+        WHERE  codeEtiquette= (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon') AND continent.nomContinentFR =  :continent;
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([':continent'=>$continent]);
     $result = $reponse -> fetchAll();
     return intval($result[0]["TOTAL"]);
 }
@@ -92,6 +92,12 @@ function total_duplicates_continent($pdo,$continent){
  * @return array
  */
 function get_duplicates($pdo,$country=""){
+    $attrs = [];
+    if(strlen($country) > 1){
+        $countryQuery = "AND isoAlpha2=:country";
+        $attrs[':country'] = $country;
+    }
+
     $requete = "SELECT * 
             FROM Capsule 
             LEFT JOIN Image ON Image.codeCapsule = Capsule.codeCapsule 
@@ -104,10 +110,10 @@ function get_duplicates($pdo,$country=""){
             LEFT JOIN Partenaire ON Echange.codePartenaire = Partenaire.codePartenaire
             LEFT JOIN Continent ON Pays.codeContinent = Continent.codeContinent
             LEFT JOIN labelliser ON labelliser.codeCapsule = capsule.codeCapsule
-            WHERE Image.estPrincipal=1 " . $country . " AND codeEtiquette = (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon')
+            WHERE Image.estPrincipal=1 " . $countryQuery . " AND codeEtiquette = (SELECT codeEtiquette FROM Etiquette WHERE libeleEtiquette='Doublon')
             ORDER BY Emplacement";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute($attrs);
     $capsules = $reponse -> fetchAll();
     return $capsules;
 }
@@ -119,6 +125,11 @@ function get_duplicates($pdo,$country=""){
  * @return array
  */
 function get_crown_caps($pdo,$country=""){
+    $attrs = [];
+    if(strlen($country) > 1){
+        $countryQuery = "AND isoAlpha2=:country";
+        $attrs[':country'] = $country;
+    }
     $requete = "SELECT * 
             FROM Capsule 
             LEFT JOIN Image ON Image.codeCapsule = Capsule.codeCapsule 
@@ -130,10 +141,10 @@ function get_crown_caps($pdo,$country=""){
             LEFT JOIN SetCapsule ON SetCapsule.codeSet = Capsule.codeSet
             LEFT JOIN Partenaire ON Echange.codePartenaire = Partenaire.codePartenaire
             LEFT JOIN Continent ON Pays.codeContinent = Continent.codeContinent
-            WHERE Image.estPrincipal=1 " . $country . "
+            WHERE Image.estPrincipal=1 " . $countryQuery . "
             ORDER BY Emplacement";             
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute($attrs);
     $capsules = $reponse -> fetchAll();
     return $capsules;
 }
@@ -149,9 +160,10 @@ function get_random_crown_caps($pdo,$amount=5){
         SELECT codeCapsule 
         FROM capsule
         ORDER BY RAND()
-        LIMIT " . $amount . ";
+        LIMIT :amount;
     ";
     $reponse = $pdo -> prepare($requete);
+    $reponse -> bindValue(':amount', $amount, PDO::PARAM_INT);
     $reponse -> execute();
     $capsules = $reponse -> fetchAll();
     return $capsules;
@@ -168,10 +180,10 @@ function get_crown_cap_info($pdo,$codeCapsule){
         FROM Capsule
         JOIN Pays ON Capsule.codePays = Pays.codePays
         LEFT JOIN Fabriquant ON Fabriquant.codeFabriquant = capsule.codeFabriquant
-        WHERE Capsule.codeCapsule = ". $codeCapsule ."
+        WHERE Capsule.codeCapsule=:cap
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([":cap"=>$codeCapsule]);
     $cap_info = $reponse -> fetchAll();
     return $cap_info[0];
 }
@@ -186,11 +198,11 @@ function get_crown_cap_images($pdo,$codeCapsule){
     $requete = "
         SELECT ImageCapsule, estPrincipal
         FROM Image
-        WHERE codeCapsule= ". $codeCapsule ."
+        WHERE codeCapsule=:cap 
         ORDER BY estPrincipal DESC
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([":cap"=>$codeCapsule]);
     $images = $reponse -> fetchAll();
     return $images;
 }
@@ -206,10 +218,10 @@ function get_crown_cap_labels($pdo,$codeCapsule){
         SELECT *
         FROM Labelliser
         JOIN Etiquette ON Etiquette.codeEtiquette = Labelliser.codeEtiquette
-        WHERE Labelliser.codeCapsule= ". $codeCapsule ."
+        WHERE Labelliser.codeCapsule=:cap
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([":cap"=>$codeCapsule]);
     $labels = $reponse -> fetchAll();
     return $labels;
 }
@@ -221,19 +233,17 @@ function get_crown_cap_labels($pdo,$codeCapsule){
  * @return mixed
  */
 function get_country_info($pdo,$iso_alpha2){
-    $country = "'" . $iso_alpha2 . "'";
     $requete = "
             SELECT isoAlpha2,nomPaysFR,nomPaysEN,count(codeCapsule) AS 'nbCapsules'
             FROM Pays 
             JOIN capsule ON capsule.codePays = Pays.codePays 
-            WHERE isoAlpha2=". $country ."
+            WHERE isoAlpha2=:country 
             GROUP BY isoAlpha2,nomPaysFR,nomPaysEN
         ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([':country' => $iso_alpha2]);
     $country_info = $reponse -> fetchAll();
-    $country_info = $country_info[0];
-    return $country_info;
+    return $country_info[0];
 }
 
 /**
@@ -245,20 +255,27 @@ function get_country_info($pdo,$iso_alpha2){
  * @return mixed
  */
 function get_countries($pdo,$isDuplicates=false,$order="",$continent=""){
+    $attrs = [];
     // ORDER BY
     if($order == "Alphabétique"){
         $orderQuery = "nomPaysFR ASC";
     }else{
         $orderQuery = "COUNT(codeCapsule) DESC";
     }
-
+    // CONTINENT
     $continentQuery = "";
+    if(in_array($continent,array("Afrique","Amérique","Asie","Europe","Océanie"))){
+        if($isDuplicates){
+            $continentQuery = "AND nomContinentFR= :continent ";
+        }else{
+            $continentQuery = "WHERE nomContinentFR= :continent ";
+        }
+        $attrs[':continent'] = $continent;
+    }
+
 
     // POUR LES DOUBLONS
     if($isDuplicates){
-        if(in_array($continent,array("Afrique","Amérique","Asie","Europe","Océanie"))){
-            $continentQuery = "AND nomContinentFR='" . $continent . "'";
-        }
         $requete = "SELECT Pays.codePays,nomPaysFR,isoAlpha2,nomContinentFR, COUNT(capsule.codeCapsule) AS 'nbCapsules'
             FROM Pays
             JOIN Continent ON Pays.codeContinent = Continent.codeContinent
@@ -269,10 +286,6 @@ function get_countries($pdo,$isDuplicates=false,$order="",$continent=""){
             ORDER BY ".$orderQuery.";
         ";
     }else{
-        if(in_array($continent,array("Afrique","Amérique","Asie","Europe","Océanie"))){
-            $continentQuery = "WHERE nomContinentFR='" . $continent . "'";
-        }
-
         $requete = "SELECT Pays.codePays,nomPaysFR,isoAlpha2,nomContinentFR, COUNT(codeCapsule) AS 'nbCapsules'
             FROM Pays
             JOIN Continent ON Pays.codeContinent = Continent.codeContinent
@@ -283,7 +296,7 @@ function get_countries($pdo,$isDuplicates=false,$order="",$continent=""){
         ";
     }
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute($attrs);
     $countries = $reponse -> fetchAll();
     return $countries;
 }
@@ -310,12 +323,12 @@ function get_sets ($pdo,$input=""){
         SELECT SetCapsule.codeSet, nomSet, descriptionSet, COUNT(codeCapsule) AS 'nbCapsules'
         FROM SetCapsule
         LEFT JOIN Capsule ON Capsule.codeSet = SetCapsule.codeSet
-        WHERE nomSet LIKE '%" . $input . "%'
+        WHERE nomSet LIKE :input 
         GROUP BY SetCapsule.codeSet, nomSet, descriptionSet
         ORDER BY nomSet ASC;
     ";
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute([':input' => "%$input%"]);
     $sets = $reponse -> fetchAll();
     return $sets;
 }
@@ -327,11 +340,20 @@ function get_sets ($pdo,$input=""){
  * @return mixed
  */
 function search_cap($pdo,$input){
+
+    $input = trim($input);
+    if (empty($input)) {
+        return [];  // Return an empty result if no input is provided
+    }
+    // Query inputs
+    $attrs = [];
+
+    // Query begin
     $debut = "
             SELECT Research.codeCapsule, Capsule.*, imageCapsule, MIN(filter)
             FROM (
     ";
-
+    // Query end
     $fin = "
             ) AS Research
             JOIN Image ON Image.codeCapsule = Research.codeCapsule
@@ -341,18 +363,18 @@ function search_cap($pdo,$input){
             GROUP BY Research.codeCapsule, imageCapsule,isoAlpha2
             ORDER BY MIN(filter), Emplacement;
     ";
-
+    // Filter 1
     $filtre_1 = "
             SELECT codeCapsule,1 as filter
             FROM Capsule
-            WHERE texteCapsule = '". $input ."' OR texteJupe = '". $input ."'
+            WHERE texteCapsule = :input_exact OR texteJupe = :input_exact
             UNION
     ";
-
+    // Filter 2
     $filtre_2 = "
             SELECT codeCapsule, 2 as filter
             FROM Capsule
-            WHERE texteCapsule LIKE '%". $input ."%' OR texteJupe LIKE '%". $input ."%' OR motsCle LIKE '%". $input ."%'
+            WHERE texteCapsule LIKE :input_like OR texteJupe LIKE :input_like OR motsCle LIKE :input_like
     ";
 
     
@@ -362,27 +384,30 @@ function search_cap($pdo,$input){
     if(count($words) > 1){
         $filtre_2 .= " UNION ";
 
+        // Filter 3
         $filtre_3 = "
                 SELECT codeCapsule, 3 as filter
                 FROM Capsule
                 WHERE 
         ";
-        foreach($words as $w){
-            $filtre_3 .= " ( texteCapsule LIKE '%" . $w . "%' OR texteJupe LIKE '%". $w ."%' OR motsCle LIKE '%". $w ."%' ) AND " ;
+        foreach($words as $index => $w){
+            $filtre_3 .= " ( texteCapsule LIKE :word_like_$index OR texteJupe LIKE :word_like_$index OR motsCle LIKE :word_like_$index ) AND " ;
         }
         $filtre_3 = substr($filtre_3,0,-4) /*. " UNION "*/;
 
+        // Filter 4
         $filtre_4 = "
                 SELECT codeCapsule, 4 as filter
                 FROM Capsule
                 WHERE 
         ";
-        foreach($words as $w){
-            $filtre_4 .= " texteCapsule LIKE '%" . $w . "%' OR texteJupe LIKE '%". $w ."%' OR motsCle LIKE '%". $w ."%' OR ";
+        foreach($words as $index => $w){
+            $filtre_4 .= " texteCapsule LIKE :word_like_$index OR texteJupe LIKE :word_like_$index OR motsCle LIKE :word_like_$index OR ";
         }
         $filtre_4 = substr($filtre_4,0,-3);
     }
 
+    // Merge query
     $requete = 
         $debut . " "
         . $filtre_1
@@ -391,9 +416,18 @@ function search_cap($pdo,$input){
         /*. $filtre_4*/ . " "
         . $fin;
 
-    //echo $requete;
+    // Query parameters
+    $attrs[':input_exact'] = $input;
+    $attrs[':input_like'] = '%' . $input . '%';
+    if(count($words) > 1){
+        foreach($words as $index => $w){
+            $attrs[":word_like_$index"] = '%' . $w . '%';
+        }
+    }
+
+    //execute and fetch results
     $reponse = $pdo -> prepare($requete);
-    $reponse -> execute();
+    $reponse -> execute($attrs);
     $capsules = $reponse -> fetchAll();
     return $capsules;
 }

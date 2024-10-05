@@ -12,7 +12,7 @@ $capsules = array();
 // WHERE clause pour un possible pays
 $country = "";
 if(isset($_POST["country"])){
-    $country = "AND isoAlpha2='" . $_POST["country"] . "'";
+    $country = $_POST["country"];
 }
 
 // Récupère les capsules à afficher

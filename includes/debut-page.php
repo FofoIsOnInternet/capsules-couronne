@@ -2,9 +2,14 @@
     session_start();
     require_once("includes/connexion_base.php");
     require("includes/functions.php");
+    $theme = "light";
+    /*
+    if(isset($_COOKIE["theme"])){
+        $theme = $_COOKIE["theme"];
+    }*/
 ?>
 <!DOCTYPE html>
-<html lang="fr" theme="light">
+<html lang="fr" theme="<? echo $theme; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

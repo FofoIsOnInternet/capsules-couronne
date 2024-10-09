@@ -29,7 +29,8 @@ const updateTheme = ()=>{
 themeButton.addEventListener('click',updateTheme);
 document.addEventListener('DOMContentLoaded',()=>{
     let theme = Cookie.getCookie("theme");
-    if(theme == "dark"){
+    let html = document.querySelector("html");
+    if(theme != html.getAttribute("theme")){
         updateTheme();
     }
 });

@@ -28,9 +28,9 @@ if(isset($_POST["search"])){ // appel à l'algorithme de recherche
 $content = "";
 for ($i=$start;$i<min($end,count($capsules));$i++) { 
     $cap = $capsules[$i];
+    $images = get_crown_cap_images($pdo, $cap['codeCapsule']);
     $content .= "<a class='crown' href='./cap.php?id=". $cap["codeCapsule"] ."' title='" . $cap["texteJupe"] . "'>";
-        $content .= "<img class='capsule-normal' src='images/capsules/" . to_valid_img_url($cap['imageCapsule'],"Capsule") . "'>";
-        $images = get_crown_cap_images($pdo, $cap['codeCapsule']);
+        $content .= "<img class='capsule-normal' src='images/capsules/" . to_valid_img_url($images[0]["ImageCapsule"],"Capsule") . "'>";
         if(sizeof($images) > 1){
             $content .= "<img class='capsule-inside' src='images/capsules/" . to_valid_img_url($images[1]["ImageCapsule"],"Capsule") . "'>";
         }

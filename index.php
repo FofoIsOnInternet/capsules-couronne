@@ -11,8 +11,8 @@
             $capsules = get_random_crown_caps($pdo);
             foreach($capsules as $cap){
                 echo "<a class='crown' href='./cap.php?id=". $cap["codeCapsule"] ."' target='_blank'>";
-                    echo "<img src='" . to_valid_img_url(get_crown_cap_images($pdo,$cap["codeCapsule"])[0][0],"Capsule") . "'>";
                     $images = get_crown_cap_images($pdo, $cap['codeCapsule']);
+                    echo "<img src='./images/crowncap_image.php?id=".$images[0]["codeImage"] . "' type='blob'>";
                     if(sizeof($images) > 1){
                         echo "<img class='capsule-inside' src='" . to_valid_img_url($images[1]["ImageCapsule"],"Capsule") . "'>";
                     }

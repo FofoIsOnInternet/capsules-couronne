@@ -126,13 +126,17 @@ function get_duplicates($pdo,$country=""){
  */
 function get_crown_caps($pdo,$country=""){
     $attrs = [];
+    $countryQuery = "";
     if(strlen($country) > 1){
-        $countryQuery = "AND isoAlpha2=:country";
-        $attrs[':country'] = $country;
+        $countryQuery = "WHERE isoAlpha2=:country";
+        $attrs=[':country'=>$country];
     }
+    /*
+     LEFT JOIN Image ON Image.codeCapsule = Capsule.codeCapsule 
+     WHERE Image.estPrincipal=1
+     */
     $requete = "SELECT * 
             FROM Capsule 
-            LEFT JOIN Image ON Image.codeCapsule = Capsule.codeCapsule 
             LEFT JOIN Rangement ON Rangement.codeRangement = Capsule.codeRangement
             LEFT JOIN Doublure ON Doublure.codeDoublure = Capsule.codeDoublure
             LEFT JOIN Pays ON Pays.codePays = Capsule.codePays
@@ -141,7 +145,7 @@ function get_crown_caps($pdo,$country=""){
             LEFT JOIN SetCapsule ON SetCapsule.codeSet = Capsule.codeSet
             LEFT JOIN Partenaire ON Echange.codePartenaire = Partenaire.codePartenaire
             LEFT JOIN Continent ON Pays.codeContinent = Continent.codeContinent
-            WHERE Image.estPrincipal=1 " . $countryQuery . "
+             " . $countryQuery . "
             ORDER BY Emplacement";             
     $reponse = $pdo -> prepare($requete);
     $reponse -> execute($attrs);
@@ -196,7 +200,7 @@ function get_crown_cap_info($pdo,$codeCapsule){
  */
 function get_crown_cap_images($pdo,$codeCapsule){
     $requete = "
-        SELECT ImageCapsule, estPrincipal
+        SELECT ImageCapsule, estPrincipal, codeImage
         FROM Image
         WHERE codeCapsule=:cap 
         ORDER BY estPrincipal DESC

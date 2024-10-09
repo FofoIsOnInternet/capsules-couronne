@@ -30,7 +30,7 @@
     }
 
     // Compte des capsules affichable sur cette page
-    if(isResearch()){ // Recherche -> résultat recherche
+    if(isResearch() && strlen($_GET["search"]) > 0){ // Recherche -> résultat recherche
         $nbCapsules = count(search_cap($pdo,$_GET["search"]));
     }elseif(isCountry()){ // Pays -> nbCapsules du pays
         if(isDuplicates()){
